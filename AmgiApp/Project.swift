@@ -23,6 +23,15 @@ let projectSettings: Settings = {
     return settings
 }()
 
+// AnkiClients' `+Live.swift` files hold nothing but `DependencyKey`
+// conformances, which only swift-dependencies' runtime cast reaches. Linked as
+// a static framework, the linker drops any archive member no symbol pulls in,
+// so DeckClient and StatsClient silently fall back to their unimplemented
+// test values. Force-load the whole archive.
+let forceLoadClients: SettingsDictionary = [
+    "OTHER_LDFLAGS": "$(inherited) -force_load $(BUILT_PRODUCTS_DIR)/AnkiClients.framework/AnkiClients",
+]
+
 let project = Project(
     name: "AmgiApp",
     options: .options(
@@ -57,7 +66,7 @@ let project = Project(
             settings: .settings(base: cxxSettings.merging([
                 "ASSETCATALOG_COMPILER_APPICON_NAME": "Dojang",
                 "ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=iphone*]": "Handwritten DeepTeal Midnight Celadon Persimmon",
-            ]) { _, value in value })
+            ]) { _, value in value }.merging(forceLoadClients) { _, value in value })
         ),
         .target(
             name: "AmgiWidget",
@@ -105,7 +114,7 @@ let project = Project(
             settings: .settings(base: [
                 "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
                 "SKIP_INSTALL": "YES",
-            ])
+            ].merging(forceLoadClients) { _, value in value })
         ),
         .target(
             name: "AmgiAppTests",
