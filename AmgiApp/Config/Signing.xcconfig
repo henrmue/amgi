@@ -1,0 +1,20 @@
+// Signing and identifiers for the AmgiApp project (app, widget, watch, tests).
+//
+// The values below are the upstream defaults. To build for your own Apple
+// Developer account, copy Signing.local.xcconfig.example to
+// Signing.local.xcconfig (gitignored) and override them there. Nothing
+// personal ever needs to land in this file.
+
+CODE_SIGN_STYLE = Automatic
+DEVELOPMENT_TEAM =
+
+// Main app bundle ID. The widget (.widget) and watch app (.watch) are derived
+// from it, and the watch's WKCompanionAppBundleIdentifier points back to it.
+AMGI_APP_BUNDLE_ID = com.amgiapp.AmgiApp
+
+// App Group shared by the app and widget. Must match AppGroup.identifier
+// (AmgiFeatures/Sources/AppCore/AppGroup.swift) and
+// AmgiUI/Sources/Theme/UserDefaults+AppGroup.swift.
+AMGI_APP_GROUP = group.com.amgiapp
+
+#include? "Signing.local.xcconfig"

@@ -38,3 +38,6 @@ design/
 Derived/
 Tuist/.build/
 Tuist/.tuist-cache/
+
+# Personal signing overrides (see AmgiApp/Config/Signing.xcconfig)
+AmgiApp/Config/Signing.local.xcconfig

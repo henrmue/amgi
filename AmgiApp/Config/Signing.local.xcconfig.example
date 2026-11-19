@@ -1,0 +1,6 @@
+// Copy to Signing.local.xcconfig (gitignored), fill in, then re-run
+//   mise exec -- tuist generate --path AmgiApp --no-open
+
+DEVELOPMENT_TEAM = YOURTEAMID
+AMGI_APP_BUNDLE_ID = com.example.amgi
+AMGI_APP_GROUP = group.com.example.amgi

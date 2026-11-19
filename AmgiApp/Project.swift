@@ -10,19 +10,32 @@ let cxxSettings: SettingsDictionary = [
     "OTHER_SWIFT_FLAGS": "$(inherited) -cxx-interoperability-mode=default",
 ]
 
+// Team ID, bundle IDs and the App Group come from Config/Signing.xcconfig,
+// which optionally includes a gitignored Signing.local.xcconfig.
+let signingXcconfig: Path = "Config/Signing.xcconfig"
+let projectSettings: Settings = {
+    var settings = AmgiModule.settings
+    settings.configurations = settings.configurations.map { configuration in
+        var configuration = configuration
+        configuration.xcconfig = signingXcconfig
+        return configuration
+    }
+    return settings
+}()
+
 let project = Project(
     name: "AmgiApp",
     options: .options(
         automaticSchemesOptions: .disabled,
         disableSynthesizedResourceAccessors: true
     ),
-    settings: AmgiModule.settings,
+    settings: projectSettings,
     targets: [
         .target(
             name: "AmgiApp",
             destinations: .iOS,
             product: .app,
-            bundleId: "com.amgiapp.AmgiApp",
+            bundleId: "$(AMGI_APP_BUNDLE_ID)",
             deploymentTargets: .iOS("18.0"),
             infoPlist: .file(path: "Info.plist"),
             sources: [.glob("Sources/**", excluding: ["Sources/Widgets/**", "Sources/Watch/**"])],
@@ -50,7 +63,7 @@ let project = Project(
             name: "AmgiWidget",
             destinations: .iOS,
             product: .appExtension,
-            bundleId: "com.amgiapp.AmgiApp.widget",
+            bundleId: "$(AMGI_APP_BUNDLE_ID).widget",
             deploymentTargets: .iOS("18.0"),
             infoPlist: .file(path: "Sources/Widgets/Info.plist"),
             sources: ["Sources/Widgets/**"],
@@ -65,12 +78,12 @@ let project = Project(
             name: "AmgiWatchApp",
             destinations: [.appleWatch],
             product: .app,
-            bundleId: "com.amgiapp.AmgiApp.watch",
+            bundleId: "$(AMGI_APP_BUNDLE_ID).watch",
             deploymentTargets: .watchOS("11.0"),
             infoPlist: .extendingDefault(with: [
                 "CFBundleShortVersionString": "$(MARKETING_VERSION)",
                 "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
-                "WKCompanionAppBundleIdentifier": "com.amgiapp.AmgiApp",
+                "WKCompanionAppBundleIdentifier": "$(AMGI_APP_BUNDLE_ID)",
             ]),
             sources: ["Sources/Watch/**"],
             dependencies: [
@@ -98,7 +111,7 @@ let project = Project(
             name: "AmgiAppTests",
             destinations: .iOS,
             product: .unitTests,
-            bundleId: "com.amgiapp.AmgiAppTests",
+            bundleId: "$(AMGI_APP_BUNDLE_ID)Tests",
             deploymentTargets: .iOS("18.0"),
             sources: ["Tests/AmgiAppTests/**"],
             resources: ["Tests/AmgiAppTests/*.mp3", "Tests/AmgiAppTests/*.zip"],
@@ -109,7 +122,7 @@ let project = Project(
             name: "AmgiAppUITests",
             destinations: .iOS,
             product: .uiTests,
-            bundleId: "com.amgiapp.AmgiAppUITests",
+            bundleId: "$(AMGI_APP_BUNDLE_ID)UITests",
             deploymentTargets: .iOS("18.0"),
             sources: ["Tests/AmgiAppUITests/**"],
             dependencies: [.target(name: "AmgiApp")]
