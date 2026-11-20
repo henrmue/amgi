@@ -43,7 +43,7 @@ let project = Project(
             ],
             settings: .settings(base: cxxSettings.merging([
                 "ASSETCATALOG_COMPILER_APPICON_NAME": "Dojang",
-                "ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=iphone*]": "Handwritten DeepTeal Midnight Celadon Persimmon",
+                "ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=iphone*]": "Handwritten DeepTeal Midnight Celadon Persimmon DojangHanzi HandwrittenHanzi DeepTealHanzi MidnightHanzi CeladonHanzi PersimmonHanzi",
             ]) { _, value in value })
         ),
         .target(

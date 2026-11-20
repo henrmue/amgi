@@ -6,6 +6,7 @@
 #if os(iOS)
 enum AppIconOption: CaseIterable, Identifiable {
     case standard, handwritten, deepTeal, midnight, celadon, persimmon
+    case dojangHanzi, handwrittenHanzi, deepTealHanzi, midnightHanzi, celadonHanzi, persimmonHanzi
 
     var id: Self { self }
 
@@ -21,6 +22,12 @@ enum AppIconOption: CaseIterable, Identifiable {
         case .midnight: "Midnight"
         case .celadon: "Celadon"
         case .persimmon: "Persimmon"
+        case .dojangHanzi: "DojangHanzi"
+        case .handwrittenHanzi: "HandwrittenHanzi"
+        case .deepTealHanzi: "DeepTealHanzi"
+        case .midnightHanzi: "MidnightHanzi"
+        case .celadonHanzi: "CeladonHanzi"
+        case .persimmonHanzi: "PersimmonHanzi"
         }
     }
 
@@ -32,6 +39,12 @@ enum AppIconOption: CaseIterable, Identifiable {
         case .midnight: "Midnight"
         case .celadon: "Celadon"
         case .persimmon: "Persimmon"
+        case .dojangHanzi: "Red Seal"
+        case .handwrittenHanzi: "Ink"
+        case .deepTealHanzi: "Lagoon"
+        case .midnightHanzi: "Night Gold"
+        case .celadonHanzi: "Jade"
+        case .persimmonHanzi: "Ember"
         }
     }
 
