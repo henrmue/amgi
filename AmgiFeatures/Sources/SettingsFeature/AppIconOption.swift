@@ -39,12 +39,12 @@ enum AppIconOption: CaseIterable, Identifiable {
         case .midnight: "Midnight"
         case .celadon: "Celadon"
         case .persimmon: "Persimmon"
-        case .dojangHanzi: "Dojang 记忆"
-        case .handwrittenHanzi: "Handwritten 记忆"
-        case .deepTealHanzi: "Deep Teal 记"
-        case .midnightHanzi: "Midnight 记"
-        case .celadonHanzi: "Celadon 己"
-        case .persimmonHanzi: "Persimmon 记"
+        case .dojangHanzi: "Red Seal"
+        case .handwrittenHanzi: "Ink"
+        case .deepTealHanzi: "Lagoon"
+        case .midnightHanzi: "Night Gold"
+        case .celadonHanzi: "Jade"
+        case .persimmonHanzi: "Ember"
         }
     }
 
